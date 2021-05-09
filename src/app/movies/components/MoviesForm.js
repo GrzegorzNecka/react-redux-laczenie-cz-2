@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect } from 'react-redux'
+import actions from '../duck/actions'
 
 const MoviesForm = () => {
   const movieInput = React.createRef();
@@ -16,4 +18,13 @@ const MoviesForm = () => {
   );
 };
 
-export default MoviesForm;
+//  mapDispatchToProp - przygotowuje obiekt, który będzie zawierał funkcje, które chcemy wywołać na store
+
+// add - umożlwia dodawanie filmów - funkcja, która przyjmuje parametr movie
+
+const mapDispatchToProp = dispatch => ({
+  add: movie => dispatch(actions.add(movie))
+});
+
+//connect użyty po to aby odpalać akcje, które wcześniej uworzylismy
+export default connect(null,mapDispatchToProps)(MoviesForm);
