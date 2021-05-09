@@ -1,13 +1,14 @@
 import React from 'react';
-import {connect } from 'react-redux'
-import actions from '../duck/actions'
+import { connect } from 'react-redux';
+import actions from '../duck/actions';
 
-const MoviesForm = () => {
+const MoviesForm = props => {
   const movieInput = React.createRef();
 
   const addMovie = event => {
     event.preventDefault();
-    console.log('form', movieInput.current.value);
+    props.add(movieInput.current.value);
+    // console.log('form', movieInput.current.value);
   };
 
   return (
@@ -22,9 +23,12 @@ const MoviesForm = () => {
 
 // add - umożlwia dodawanie filmów - funkcja, która przyjmuje parametr movie
 
-const mapDispatchToProp = dispatch => ({
+const mapDispatchToProps = dispatch => ({
   add: movie => dispatch(actions.add(movie))
 });
 
 //connect użyty po to aby odpalać akcje, które wcześniej uworzylismy
-export default connect(null,mapDispatchToProps)(MoviesForm);
+export default connect(
+  null,
+  mapDispatchToProps
+)(MoviesForm);
